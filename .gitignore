@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+.venv/
+venv/
+
+# Node / Next.js
+node_modules/
+dashboard/.next/
+dashboard/out/
+dashboard/.turbo/
+npm-debug.log*
+
+# Env / secrets
+.env
+.env.local
+*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keep cached data committed (offline-after-first-run), but ignore scratch
+data/cache/*.tmp
+*.log

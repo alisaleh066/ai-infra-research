@@ -1,0 +1,15 @@
+{
+  "_note": "PLACEHOLDER / SAMPLE portfolio — no Trading212 MCP was connected at build time. Replace with your live positions or connect Trading212. Values are illustrative inputs, NOT real holdings.",
+  "base_currency": "GBP",
+  "as_of": "ASSUMPTION — sample",
+  "positions": [
+    {"ticker": "MU",   "name": "Micron Technology",      "theme": "HBM memory",        "weight_pct": 14.0},
+    {"ticker": "NVDA", "name": "NVIDIA",                 "theme": "GPU compute",       "weight_pct": 18.0},
+    {"ticker": "TSM",  "name": "TSMC",                   "theme": "Advanced packaging",  "weight_pct": 12.0},
+    {"ticker": "ASML", "name": "ASML",                   "theme": "Lithography",       "weight_pct": 9.0},
+    {"ticker": "VST",  "name": "Vistra",                 "theme": "Power & grid",      "weight_pct": 7.0},
+    {"ticker": "CCJ",  "name": "Cameco",                 "theme": "Uranium",           "weight_pct": 5.0},
+    {"ticker": "FCX",  "name": "Freeport-McMoRan",       "theme": "Copper",            "weight_pct": 5.0},
+    {"ticker": "CASH", "name": "Cash & other",           "theme": "—",                 "weight_pct": 30.0}
+  ]
+}
