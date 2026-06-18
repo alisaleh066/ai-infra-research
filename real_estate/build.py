@@ -64,12 +64,14 @@ def main() -> None:
     sim_default = simulate(BASE_DEAL, default_drivers, baselines, coeffs)
 
     # Driver slider ranges for the dashboard
+    # NB: steps are fine-grained (1,000) so the exact data/baseline values are representable and
+    # the controlled range inputs never snap the defaults to a nearby value.
     driver_ranges = {
-        "net_migration": {"min": 0, "max": 900000, "step": 10000, "unit": "people/yr",
+        "net_migration": {"min": 0, "max": 900000, "step": 1000, "unit": "people/yr",
                           "label": "Net migration"},
-        "household_formation": {"min": 80000, "max": 300000, "step": 5000, "unit": "hh/yr",
+        "household_formation": {"min": 80000, "max": 300000, "step": 1000, "unit": "hh/yr",
                                 "label": "Household formation"},
-        "completions": {"min": 120000, "max": 400000, "step": 5000, "unit": "dwellings/yr",
+        "completions": {"min": 120000, "max": 400000, "step": 1000, "unit": "dwellings/yr",
                         "label": "Housing completions (supply)"},
         "employment_rate": {"min": 68, "max": 80, "step": 0.1, "unit": "%",
                             "label": "Employment rate"},
@@ -81,6 +83,7 @@ def main() -> None:
         "deal": {
             "region": "North West (illustrative 6-unit block)",
             "units": len(BASE_DEAL.units_monthly_rent),
+            "units_monthly_rent": list(BASE_DEAL.units_monthly_rent),
             "gross_rent_pa": sum(BASE_DEAL.units_monthly_rent) * 12,
             **{k: getattr(BASE_DEAL, k) for k in
                ("vacancy_rate", "opex_ratio", "entry_cap_rate", "ltv",

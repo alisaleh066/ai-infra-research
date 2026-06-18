@@ -25,6 +25,21 @@ transparent demand/supply fundamentals. This platform **values** one node in tha
 
 See **`projects.md`** for full descriptions and each project's Definition of Done.
 
+## Dashboard
+One cohesive institutional design system (deep navy/slate + a single gold accent; Fraunces +
+IBM Plex). Static-exported Next.js — deploys to GitHub Pages / Vercel with no server.
+
+![Overview](docs/screenshots/01-overview.png)
+
+| Valuation | Bottleneck Map | Real-Estate ROI simulator |
+|-----------|----------------|---------------------------|
+| ![Valuation](docs/screenshots/02-valuation.png) | ![Bottleneck](docs/screenshots/03-bottleneck.png) | ![Real estate](docs/screenshots/04-realestate.png) |
+
+**Why this stack:** static-export Next.js + Tailwind gives institutional polish and zero-infra
+hosting for a public portfolio; the DCF sensitivity and the ROI simulator recompute **client-side
+in TypeScript** (ported formula-for-formula from the Python engines, verified to match to 4 dp) so
+a reviewer can flex assumptions live — no backend required.
+
 ## Architecture
 ```
         SEC EDGAR / market MCPs        HM Land Registry + ONS
@@ -61,8 +76,10 @@ All fundamentals are sourced (see **`DATA_SOURCES.md`**). Any value that could n
 a clearly-labelled **assumption / input** (blue in Excel, flagged in the UI) — never fabricated.
 
 ## Status
-Build in progress — see **`PROGRESS.md`** for live self-scores. Investment takeaways in
-**`CONCLUSIONS.md`**. Screenshots/GIFs added at integration (M4).
+All three projects complete and verified; dashboard integrated. **42 Python tests pass**, both
+Excel models audit with **zero formula errors** (and reconcile to the Python engines via
+LibreOffice recalculation), and the dashboard builds to a static export. See **`PROGRESS.md`** for
+per-project self-scores and **`CONCLUSIONS.md`** for the investment takeaways.
 
 ## License / data notices
 UK data under the Open Government Licence (Land Registry, ONS). SEC EDGAR data is public domain.

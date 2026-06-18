@@ -26,3 +26,6 @@ Thumbs.db
 # Keep cached data committed (offline-after-first-run), but ignore scratch
 data/cache/*.tmp
 *.log
+
+# Playwright MCP artifacts
+dashboard/.playwright-mcp/

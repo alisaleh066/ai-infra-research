@@ -69,6 +69,12 @@ def main() -> None:
     f = load_fundamentals()
     a = build_assumptions(f)
 
+    # Make the sample portfolio importable by the dashboard (no Trading212 MCP connected).
+    import shutil
+    src_pos = ROOT / "data" / "sample_positions.json"
+    if src_pos.exists():
+        shutil.copyfile(src_pos, DASH / "portfolio.json")
+
     dcf = enterprise_value(a)
     w = dcf["wacc"]
 

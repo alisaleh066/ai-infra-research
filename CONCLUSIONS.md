@@ -41,5 +41,21 @@ further. The honest message for an underwriter: UK residential return today lean
 demand side staying elevated and rates easing the exit cap — both visible, both stress-testable.
 
 ## Cross-cutting thesis
-_Synthesis across all three: where in the AI-infra + real-asset stack the risk-adjusted return
-looks most asymmetric, and how the live/sample portfolio is positioned against it._
+Three lenses, one conclusion: **the durable return in this cycle is upstream and physical.**
+
+- The **bottleneck map** locates the scarcity — advanced packaging, HBM and power — not the
+  headline GPU.
+- The **Micron valuation** prices one of those bottlenecks (HBM) on audited numbers and finds the
+  upside is real but *conditional* on capex discipline and margins holding above mid-cycle — a wide
+  distribution, not a sure thing.
+- The **UK real-estate model** shows the same discipline applied to a real asset: return is a
+  transparent function of demand vs supply, and today leans on elevated migration and easing rates
+  — both explicitly stress-testable rather than assumed.
+
+**Where the risk-adjusted return looks most asymmetric:** the tightest, most concentrated layers
+with the slowest supply response (packaging/HBM, then power) — exactly where the (sample) portfolio
+is already weighted. The honest throughline across all three is **transparency over false
+precision**: every figure is sourced or flagged, every model exposes its assumptions, and the
+ranges (sensitivity grids, Monte Carlo, the live ROI simulator) matter more than any single number.
+
+> Research/portfolio artifact — **not investment advice.**

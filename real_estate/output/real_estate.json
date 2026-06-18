@@ -2,6 +2,14 @@
   "deal": {
     "region": "North West (illustrative 6-unit block)",
     "units": 6,
+    "units_monthly_rent": [
+      950,
+      950,
+      950,
+      950,
+      900,
+      900
+    ],
     "gross_rent_pa": 67200,
     "vacancy_rate": 0.05,
     "opex_ratio": 0.25,
@@ -110,21 +118,21 @@
       "net_migration": {
         "min": 0,
         "max": 900000,
-        "step": 10000,
+        "step": 1000,
         "unit": "people/yr",
         "label": "Net migration"
       },
       "household_formation": {
         "min": 80000,
         "max": 300000,
-        "step": 5000,
+        "step": 1000,
         "unit": "hh/yr",
         "label": "Household formation"
       },
       "completions": {
         "min": 120000,
         "max": 400000,
-        "step": 5000,
+        "step": 1000,
         "unit": "dwellings/yr",
         "label": "Housing completions (supply)"
       },

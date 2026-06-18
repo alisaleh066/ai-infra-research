@@ -49,3 +49,14 @@ Living log. Updated after every build/verify cycle. Format: done / failed / next
 - **self-score:** 9/10 (−1: interactive simulator UI deferred to M4).
 - **next:** M4 — integrate the unified dashboard + final docs.
 - **blocked:** none.
+
+### M4 — Dashboard integration + final docs
+- **done:** Next.js + Tailwind static-export dashboard with all three views + landing; institutional
+  design system (navy/slate + gold, Fraunces + IBM Plex); ROI simulator ported to TS and **verified
+  live in-browser to match the Python engine** (default IRR 18.7%, migration→baseline 14.1%, both ==
+  Python); football field / Monte Carlo / heatmaps / supply-chain / capital-flow components; portfolio
+  panel. `npm run build` produces a clean static export. Screenshots captured to `docs/screenshots/`.
+  Root README updated with screenshots + stack justification; CONCLUSIONS cross-cutting thesis written.
+- **full verification:** 42 pytest pass; both xlsx audit PASS (zero formula errors) + LibreOffice
+  recalc reconciles to engines; dashboard builds and renders all three modules; simulator interactive.
+- **self-score:** 9/10.
