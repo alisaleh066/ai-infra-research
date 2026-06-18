@@ -14,6 +14,11 @@ from openpyxl import load_workbook
 
 ERROR_TOKENS = ("#REF!", "#DIV/0!", "#VALUE!", "#NAME?", "#N/A", "#NULL!", "#NUM!")
 _CELL_RE = re.compile(r"\$?([A-Z]{1,3})\$?(\d+)")
+# Sheet-qualified references (Sheet!A1 or 'Sheet Name'!A1, incl. ranges) — these point at
+# OTHER sheets and must be removed before the same-sheet circular-reference check.
+_CROSS_SHEET_RE = re.compile(
+    r"(?:'[^']*'|[A-Za-z_][A-Za-z0-9.]*)!\$?[A-Z]{1,3}\$?\d+(?::\$?[A-Z]{1,3}\$?\d+)?"
+)
 
 
 def audit_workbook(path: str | Path) -> dict:
@@ -40,8 +45,10 @@ def audit_workbook(path: str | Path) -> dict:
                 # formulas
                 if isinstance(val, str) and val.startswith("="):
                     formula_count += 1
-                    # direct circular reference: formula references its own coordinate
-                    refs = {f"{c}{r}" for c, r in _CELL_RE.findall(val.upper())}
+                    # direct circular reference: formula references its own coordinate.
+                    # Strip cross-sheet references first so Sheet!A1 doesn't false-positive.
+                    local = _CROSS_SHEET_RE.sub("", val.upper())
+                    refs = {f"{c}{r}" for c, r in _CELL_RE.findall(local)}
                     if cell.coordinate.upper() in refs:
                         errors.append(
                             f"{ws.title}!{cell.coordinate}: circular self-reference -> {val!r}"
