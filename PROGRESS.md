@@ -7,7 +7,7 @@ Living log. Updated after every build/verify cycle. Format: done / failed / next
 |---------|-----------|-------|--------|
 | 1 — Valuation (MU)      | 9 /10 | pass | model+tests+docs done; dashboard view at M4 |
 | 2 — Bottleneck Map      | 9 /10 | pass | scoring+tests+docs done; dashboard view at M4 |
-| 3 — Real Estate + ROI   | – /10 | – | not started |
+| 3 — Real Estate + ROI   | 9 /10 | pass | model+sim+tests+docs done; dashboard view at M4 |
 
 ---
 
@@ -38,4 +38,14 @@ Living log. Updated after every build/verify cycle. Format: done / failed / next
   constraint resolves to **CoWoS advanced packaging (92.2)** — the known real bottleneck.
 - **self-score:** 9/10 (−1: interactive dashboard view deferred to M4).
 - **next:** Project 3 — UK real estate.
+- **blocked:** none.
+
+### M3 — Project 3: UK Real Estate + ROI simulator
+- **done:** `re_engine.py` (underwriting + transparent driver-based ROI simulator);
+  `UK_underwriting.xlsx` with linked formulas + live `IRR()`; `real_estate.json` exports deal,
+  sensitivity grid, simulator coefficients/baselines/ranges for the dashboard; 15 unit tests pass;
+  model-auditor PASS; **LibreOffice recalc confirms IRR 11.92%, EM 1.67x**. Simulator on live UK
+  data (net migration 431k) → rent growth 4.24%, IRR 18.74%. UK data from Land Registry + ONS.
+- **self-score:** 9/10 (−1: interactive simulator UI deferred to M4).
+- **next:** M4 — integrate the unified dashboard + final docs.
 - **blocked:** none.

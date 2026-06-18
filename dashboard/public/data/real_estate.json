@@ -1,0 +1,158 @@
+{
+  "deal": {
+    "region": "North West (illustrative 6-unit block)",
+    "units": 6,
+    "gross_rent_pa": 67200,
+    "vacancy_rate": 0.05,
+    "opex_ratio": 0.25,
+    "entry_cap_rate": 0.06,
+    "ltv": 0.65,
+    "purchase_costs_pct": 0.05,
+    "selling_costs_pct": 0.015,
+    "hold_years": 5
+  },
+  "base_case": {
+    "noi": 47880.0,
+    "valuation": 798000.0,
+    "loan": 518700.0,
+    "equity": 319200.0,
+    "dscr": 1.605351170568562,
+    "irr": 0.11924423151812702,
+    "equity_multiple": 1.668427762847663,
+    "cash_flows": [
+      -319200.0,
+      19491.15,
+      20970.642,
+      22494.51876,
+      24064.111822800005,
+      445541.71931817394
+    ]
+  },
+  "sensitivity": {
+    "exit_caps": [
+      0.05,
+      0.055,
+      0.06,
+      0.065,
+      0.07
+    ],
+    "rent_growths": [
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0.05
+    ],
+    "grid": [
+      [
+        0.13839917742597513,
+        0.1658660772282079,
+        0.19221218312274535,
+        0.2176076099358568,
+        0.24218777823762955
+      ],
+      [
+        0.09809839485436919,
+        0.1271733853440207,
+        0.1548288642312895,
+        0.18130136362388496,
+        0.2067741740496532
+      ],
+      [
+        0.05899047301828058,
+        0.0900224540877948,
+        0.11924423151812702,
+        0.14698894215344177,
+        0.17350672460007355
+      ],
+      [
+        0.02033478629554364,
+        0.053775095128224246,
+        0.08488077123927436,
+        0.11412962723956183,
+        0.1418672102525505
+      ],
+      [
+        -0.018623756509086063,
+        0.017833919410351028,
+        0.05123024134964109,
+        0.08226772474518906,
+        0.11143174399861885
+      ]
+    ]
+  },
+  "simulator": {
+    "baselines": {
+      "net_migration": 250000.0,
+      "household_formation": 165000.0,
+      "completions": 234000.0,
+      "employment_rate": 74.8,
+      "bank_rate_pct": 4.25
+    },
+    "coefficients": {
+      "base_rent_growth": 0.025,
+      "w_migration": 0.4,
+      "w_formation": 0.35,
+      "w_employment": 0.25,
+      "rent_growth_sensitivity": 0.06,
+      "debt_margin": 0.015,
+      "cap_sensitivity_to_rate": 0.5,
+      "base_exit_cap": 0.055
+    },
+    "default_drivers": {
+      "net_migration": 431000,
+      "household_formation": 165000,
+      "completions": 234000,
+      "employment_rate": 74.8,
+      "bank_rate_pct": 4.25
+    },
+    "driver_ranges": {
+      "net_migration": {
+        "min": 0,
+        "max": 900000,
+        "step": 10000,
+        "unit": "people/yr",
+        "label": "Net migration"
+      },
+      "household_formation": {
+        "min": 80000,
+        "max": 300000,
+        "step": 5000,
+        "unit": "hh/yr",
+        "label": "Household formation"
+      },
+      "completions": {
+        "min": 120000,
+        "max": 400000,
+        "step": 5000,
+        "unit": "dwellings/yr",
+        "label": "Housing completions (supply)"
+      },
+      "employment_rate": {
+        "min": 68,
+        "max": 80,
+        "step": 0.1,
+        "unit": "%",
+        "label": "Employment rate"
+      },
+      "bank_rate_pct": {
+        "min": 0.5,
+        "max": 8,
+        "step": 0.25,
+        "unit": "%",
+        "label": "Bank Rate"
+      }
+    },
+    "default_result": {
+      "irr": 0.18743828667817547,
+      "equity_multiple": 2.2046876615501207,
+      "dscr": 1.605351170568562,
+      "implied_rent_growth": 0.042376,
+      "implied_exit_cap": 0.055,
+      "implied_debt_rate": 0.0575,
+      "demand_pressure": 0.2896
+    },
+    "data_vintage": "2024-2025 official-statistics releases; retrieved 2026-06-18"
+  },
+  "notes": "Underwriting is assumption-driven and transparent. The simulator maps observable demand/supply drivers to rent growth/exit cap via explicit elasticities \u2014 immigration is one visible driver, never a hidden signal. UK data: Land Registry + ONS."
+}

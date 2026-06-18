@@ -29,8 +29,16 @@ not the headline chip**: TSMC-adjacent packaging, the HBM oligopoly (ties direct
 Micron), and the power/grid layer that the next wave of capital is only now reaching.
 
 ## 3. UK Real Estate
-_To be completed at end of Project 3 (base-case IRR / equity multiple, sensitivity to exit cap
-and rent growth, how IRR responds to the migration/demand driver)._
+The illustrative North West 6-unit block underwrites to a **base-case levered IRR ≈ 11.9%** and
+**equity multiple ≈ 1.67x** at a 1.6x DSCR. The two-way grid shows IRR is most sensitive to **exit
+cap** (re-rating risk) and **rent growth**. Running the **ROI simulator on the latest UK data**
+(net migration ~431k vs a ~250k baseline) implies ~4.2% rent growth and lifts IRR to **~18.7%**.
+
+**Takeaway:** the return is a transparent function of demand vs supply. Migration is the largest
+single swing among the demand drivers, but it is **one explicit, adjustable input** — dial it back
+to baseline and the IRR compresses toward the low-teens; raise completions (supply) and it falls
+further. The honest message for an underwriter: UK residential return today leans heavily on the
+demand side staying elevated and rates easing the exit cap — both visible, both stress-testable.
 
 ## Cross-cutting thesis
 _Synthesis across all three: where in the AI-infra + real-asset stack the risk-adjusted return
