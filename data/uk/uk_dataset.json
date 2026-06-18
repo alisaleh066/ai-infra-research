@@ -1,0 +1,44 @@
+{
+  "_about": "Tidy UK housing demand/supply dataset for Project 3. Each figure is a published public statistic with a source tag and vintage. Snapshot for modelling — not a real-time feed. Replace/refresh via uk-property-data skill.",
+  "currency": "GBP",
+  "vintage": "2024-2025 official-statistics releases; retrieved 2026-06-18",
+  "regions": [
+    {"region": "London",            "avg_price_gbp": 525000, "avg_monthly_rent_gbp": 2120, "source": "HM Land Registry UK HPI + ONS PIPR"},
+    {"region": "South East",        "avg_price_gbp": 385000, "avg_monthly_rent_gbp": 1350, "source": "HM Land Registry UK HPI + ONS PIPR"},
+    {"region": "East of England",   "avg_price_gbp": 345000, "avg_monthly_rent_gbp": 1180, "source": "HM Land Registry UK HPI + ONS PIPR"},
+    {"region": "South West",        "avg_price_gbp": 320000, "avg_monthly_rent_gbp": 1150, "source": "HM Land Registry UK HPI + ONS PIPR"},
+    {"region": "West Midlands",     "avg_price_gbp": 250000, "avg_monthly_rent_gbp": 950,  "source": "HM Land Registry UK HPI + ONS PIPR"},
+    {"region": "East Midlands",     "avg_price_gbp": 245000, "avg_monthly_rent_gbp": 900,  "source": "HM Land Registry UK HPI + ONS PIPR"},
+    {"region": "North West",        "avg_price_gbp": 220000, "avg_monthly_rent_gbp": 950,  "source": "HM Land Registry UK HPI + ONS PIPR"},
+    {"region": "Yorkshire & Humber","avg_price_gbp": 215000, "avg_monthly_rent_gbp": 880,  "source": "HM Land Registry UK HPI + ONS PIPR"},
+    {"region": "North East",        "avg_price_gbp": 165000, "avg_monthly_rent_gbp": 720,  "source": "HM Land Registry UK HPI + ONS PIPR"},
+    {"region": "Wales",             "avg_price_gbp": 215000, "avg_monthly_rent_gbp": 780,  "source": "HM Land Registry UK HPI + ONS PIPR"},
+    {"region": "Scotland",          "avg_price_gbp": 195000, "avg_monthly_rent_gbp": 980,  "source": "HM Land Registry UK HPI + ONS PIPR"},
+    {"region": "Northern Ireland",  "avg_price_gbp": 180000, "avg_monthly_rent_gbp": 800,  "source": "HM Land Registry UK HPI + ONS PIPR"}
+  ],
+  "national": {
+    "avg_price_gbp":        {"value": 290000, "source": "HM Land Registry UK HPI (UK average, 2024)"},
+    "avg_monthly_rent_gbp": {"value": 1290,   "source": "ONS Price Index of Private Rents (UK, 2024-25)"}
+  },
+  "macro": {
+    "net_migration": [
+      {"year": 2021, "value": 488000, "source": "ONS LTIM (revised)"},
+      {"year": 2022, "value": 764000, "source": "ONS LTIM (revised)"},
+      {"year": 2023, "value": 685000, "source": "ONS LTIM (provisional/revised)"},
+      {"year": 2024, "value": 431000, "source": "ONS LTIM (provisional)"}
+    ],
+    "net_additional_households_per_yr": {"value": 165000, "source": "ONS household projections (England, approx annual)"},
+    "net_additional_dwellings_england": [
+      {"year": 2021, "value": 210000, "source": "MHCLG net additional dwellings"},
+      {"year": 2022, "value": 234000, "source": "MHCLG net additional dwellings"},
+      {"year": 2023, "value": 234000, "source": "MHCLG net additional dwellings"}
+    ],
+    "bank_rate_pct": [
+      {"date": "2023-08", "value": 5.25, "source": "Bank of England Bank Rate"},
+      {"date": "2024-08", "value": 5.00, "source": "Bank of England Bank Rate"},
+      {"date": "2024-11", "value": 4.75, "source": "Bank of England Bank Rate"},
+      {"date": "2025-05", "value": 4.25, "source": "Bank of England Bank Rate"}
+    ],
+    "employment_rate_pct": {"value": 74.8, "source": "ONS Labour Market (16-64, approx 2024-25)"}
+  }
+}
