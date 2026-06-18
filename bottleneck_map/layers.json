@@ -1,0 +1,63 @@
+{
+  "_about": "AI-infrastructure supply-chain layers, upstream-ordered. Each metric is normalised to [0,1], higher = tighter. Metric levels are CURATED ESTIMATES informed by public company commentary and industry reporting (see provenance) — directional, not precise measurements. Tagged 'curated' accordingly. Replace with measured figures where available.",
+  "provenance": "Curated from public earnings commentary and industry reporting (e.g. TSMC CoWoS capacity commentary; HBM 'sold out' commentary from SK Hynix/Micron; grid transformer & turbine lead-time reporting; copper mine development timelines; uranium supply commentary). 2024-2025 vintage.",
+  "tag": "curated",
+  "layers": [
+    {
+      "id": "gpu", "name": "GPUs / AI accelerators", "position": 1,
+      "lead_player": "NVIDIA (+ AMD)",
+      "metrics": {"utilization": 0.85, "lead_time": 0.70, "supply_inelasticity": 0.55, "concentration": 0.95},
+      "note": "Demand-driving layer; supply gated by the layers beneath it (packaging, HBM)."
+    },
+    {
+      "id": "hbm", "name": "HBM memory", "position": 2,
+      "lead_player": "SK Hynix, Samsung, Micron",
+      "metrics": {"utilization": 0.95, "lead_time": 0.85, "supply_inelasticity": 0.80, "concentration": 0.85},
+      "note": "HBM capacity reported effectively sold out across the cycle; 3-supplier oligopoly."
+    },
+    {
+      "id": "cowos", "name": "Advanced packaging (CoWoS)", "position": 3,
+      "lead_player": "TSMC",
+      "metrics": {"utilization": 0.98, "lead_time": 0.90, "supply_inelasticity": 0.85, "concentration": 0.95},
+      "note": "The widely-cited binding constraint: CoWoS capacity additions lag accelerator demand."
+    },
+    {
+      "id": "foundry", "name": "Leading-edge foundry", "position": 4,
+      "lead_player": "TSMC",
+      "metrics": {"utilization": 0.90, "lead_time": 0.75, "supply_inelasticity": 0.90, "concentration": 0.92},
+      "note": "Sub-5nm wafer capacity; new fabs take years and tens of billions of capex."
+    },
+    {
+      "id": "power", "name": "Power & grid", "position": 5,
+      "lead_player": "Utilities, GE Vernova, Siemens Energy",
+      "metrics": {"utilization": 0.80, "lead_time": 0.95, "supply_inelasticity": 0.92, "concentration": 0.55},
+      "note": "Grid interconnection queues + multi-year lead times for transformers and turbines."
+    },
+    {
+      "id": "copper", "name": "Copper", "position": 6,
+      "lead_player": "Freeport, BHP, Codelco",
+      "metrics": {"utilization": 0.78, "lead_time": 0.80, "supply_inelasticity": 0.88, "concentration": 0.45},
+      "note": "Electrification + datacenter demand vs. ~10yr+ greenfield mine development."
+    },
+    {
+      "id": "uranium", "name": "Uranium / nuclear fuel", "position": 7,
+      "lead_player": "Cameco, Kazatomprom",
+      "metrics": {"utilization": 0.82, "lead_time": 0.85, "supply_inelasticity": 0.80, "concentration": 0.60},
+      "note": "Datacenter power appetite reviving nuclear; primary supply slow to restart."
+    }
+  ],
+  "capital_flow": {
+    "_note": "Illustrative directional capex/investment intensity by layer ($bn-scale index), showing capital migrating upstream as each constraint binds. Tagged 'illustrative' — not audited capex totals.",
+    "tag": "illustrative",
+    "years": [2022, 2023, 2024, 2025, 2026],
+    "series": {
+      "gpu":     [40, 70, 110, 140, 160],
+      "hbm":     [8, 14, 28, 45, 60],
+      "cowos":   [4, 9, 22, 40, 55],
+      "foundry": [30, 35, 45, 60, 75],
+      "power":   [10, 14, 22, 38, 58],
+      "copper":  [12, 14, 18, 26, 36],
+      "uranium": [3, 4, 7, 12, 18]
+    }
+  }
+}

@@ -6,7 +6,7 @@ Living log. Updated after every build/verify cycle. Format: done / failed / next
 | Project | Self-score | Gates | Status |
 |---------|-----------|-------|--------|
 | 1 — Valuation (MU)      | 9 /10 | pass | model+tests+docs done; dashboard view at M4 |
-| 2 — Bottleneck Map      | – /10 | – | not started |
+| 2 — Bottleneck Map      | 9 /10 | pass | scoring+tests+docs done; dashboard view at M4 |
 | 3 — Real Estate + ROI   | – /10 | – | not started |
 
 ---
@@ -30,3 +30,12 @@ Living log. Updated after every build/verify cycle. Format: done / failed / next
 - **next:** Project 2 — Bottleneck Map.
 - **blocked:** none. Note: FMP quote/statements paywalled (402) and FMP price anomalous →
   fundamentals sourced from EDGAR, price/beta flagged as assumptions.
+
+### M2 — Project 2: Bottleneck Map
+- **done:** `scoring.py` (transparent weighted tightness metric); `layers.json` (7 layers +
+  capital-flow series, provenance tagged); `build.py` exports `bottleneck.json`; 14 unit tests
+  pass (bounds, monotonicity per metric, weighting, ranking, weights validation). Binding
+  constraint resolves to **CoWoS advanced packaging (92.2)** — the known real bottleneck.
+- **self-score:** 9/10 (−1: interactive dashboard view deferred to M4).
+- **next:** Project 3 — UK real estate.
+- **blocked:** none.

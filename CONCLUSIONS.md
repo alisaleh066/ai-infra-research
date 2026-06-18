@@ -18,8 +18,15 @@ a point** — the asymmetry depends heavily on whether HBM margins hold above mi
 price/beta/peer multiples in to refresh the upside/downside.
 
 ## 2. Bottleneck Map
-_To be completed at end of Project 2 (which layer is the binding constraint, where capital is
-migrating, the investable implication)._
+Scoring the AI-infra chain on a transparent tightness metric, the **binding constraint is
+advanced packaging (CoWoS, tightness ≈ 92)**, narrowly ahead of HBM (≈ 87) and leading-edge
+foundry (≈ 87) — consistent with CoWoS capacity being the widely-reported gate on accelerator
+shipments. Power & grid (≈ 82) is the fastest-rising constraint behind them.
+
+**Takeaway:** the asymmetric return is upstream of the GPU, not in it. The capital-flow view shows
+spend migrating toward packaging, HBM and power — so the investable read is **own the bottleneck,
+not the headline chip**: TSMC-adjacent packaging, the HBM oligopoly (ties directly to Project 1's
+Micron), and the power/grid layer that the next wave of capital is only now reaching.
 
 ## 3. UK Real Estate
 _To be completed at end of Project 3 (base-case IRR / equity multiple, sensitivity to exit cap
