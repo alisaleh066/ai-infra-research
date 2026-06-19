@@ -5,10 +5,13 @@ Type any US-listed ticker -> live DCF + comps + Monte Carlo.
 """
 from __future__ import annotations
 
+from pathlib import Path
+
 import pandas as pd
 import streamlit as st
 
 import value as valuemod
+import analyze as analyzemod
 
 st.set_page_config(page_title="Equity Valuation", page_icon="📈", layout="wide")
 st.title("Equity Valuation — any US-listed stock")
@@ -60,3 +63,29 @@ if go and ticker:
         st.warning("Flags: " + ", ".join(s["data_flags"] + s["assumption_notes"]))
     st.success(f"Saved Excel + JSON to output/{s['ticker']}_valuation.*")
     st.caption(s["sources"])
+
+    # ---------- Financial-statement & quality analysis (analyze.py) ----------
+    st.divider()
+    st.subheader("Financial-statement & quality analysis")
+    with st.spinner("Running ratios, DuPont, F-Score, Altman Z, Beneish M, Sloan, reverse DCF..."):
+        rep = analyzemod.analyze(ticker)
+    rw, pf, az = rep["roic_vs_wacc"], rep["piotroski"], rep["altman_z"]
+    bm, sl, rd = rep["beneish_m"], rep["sloan"], rep["reverse_dcf"]
+    q = st.columns(4)
+    q[0].metric("ROIC vs WACC",
+                f"{(rw['roic'] or 0)*100:.0f}% / {rw['wacc']*100:.0f}%",
+                "creates value" if rw.get("creates_value") else "below WACC")
+    q[1].metric("Piotroski F", f"{pf.get('score')}/9", pf.get("verdict", ""))
+    q[2].metric("Altman Z", f"{az.get('z', 'n/a')}", az.get("zone", ""))
+    q[3].metric("Beneish M", f"{bm.get('m', 'n/a')}", bm.get("flag", ""))
+    q2 = st.columns(4)
+    r = rep["ratios"]
+    q2[0].metric("Gross margin", f"{(r['gross_margin'] or 0)*100:.0f}%")
+    q2[1].metric("Net margin", f"{(r['net_margin'] or 0)*100:.0f}%")
+    q2[2].metric("Accruals quality", sl.get("quality", "n/a"))
+    rg = rd.get("implied_growth")
+    q2[3].metric("Reverse-DCF growth", f"{rg*100:.0f}%" if rg is not None else "n/a",
+                 "implied by price")
+    with st.expander("Read the full research note"):
+        st.markdown(Path(f"output/{rep['ticker']}_research.md").read_text(encoding="utf-8"))
+    st.success(f"Saved research note + analysis to output/{rep['ticker']}_research.md / _analysis.xlsx")
