@@ -1,0 +1,25 @@
+{
+  "_about": "Illustrative value-add multifamily deal. Edit these inputs (or pass your own JSON to roi.py). Currency-agnostic — keep all figures in one currency.",
+  "currency": "GBP",
+  "deal": {
+    "purchase_price": 10000000,
+    "in_place_noi": 600000,
+    "going_in_cap": 0.06,
+    "exit_cap": 0.0575,
+    "hold_years": 5,
+    "noi_uplift_pct": 0.30,
+    "stabilize_years": 2,
+    "post_stabilize_growth": 0.03,
+    "renovation_capex": 1500000,
+    "acquisition_costs_pct": 0.02,
+    "selling_costs_pct": 0.015,
+    "ltv": 0.65,
+    "interest_rate": 0.065
+  },
+  "waterfall_tiers": [
+    [0.08, 0.20],
+    [0.12, 0.30],
+    [0.15, 0.40]
+  ],
+  "_waterfall_note": "Each entry is [IRR hurdle, GP promote share above it]. Below the first hurdle (8%) the LP receives 100% (return of capital + preferred return)."
+}
