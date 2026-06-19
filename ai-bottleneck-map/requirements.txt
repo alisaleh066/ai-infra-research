@@ -1,0 +1,4 @@
+# AI bottleneck map — Python deps. Install: setup.bat
+pytest==7.4.4
+streamlit==1.37.1
+pandas==2.2.2

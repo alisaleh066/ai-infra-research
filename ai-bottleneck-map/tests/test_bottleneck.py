@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "bottleneck_map"))
+sys.path.insert(0, str(ROOT))
 
 from scoring import (  # noqa: E402
     DEFAULT_WEIGHTS, METRICS, binding_constraint, layer_tightness, normalize,
@@ -88,6 +88,6 @@ def test_score_layers_sorted_and_binding():
 
 def test_real_dataset_binding_is_cowos():
     import json
-    raw = json.loads((ROOT / "bottleneck_map" / "layers.json").read_text(encoding="utf-8"))
+    raw = json.loads((ROOT / "layers.json").read_text(encoding="utf-8"))
     scored = score_layers(raw["layers"])
     assert binding_constraint(scored)["id"] == "cowos"      # the known real bottleneck

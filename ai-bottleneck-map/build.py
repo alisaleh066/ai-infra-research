@@ -1,6 +1,6 @@
-"""build.py — Project 2 entry point: score the supply-chain layers and export JSON.
+"""build.py — score the AI supply-chain layers and export JSON.
 
-Run:  python bottleneck_map/build.py
+Run:  run.bat   (or: python build.py)
 """
 from __future__ import annotations
 
@@ -8,19 +8,17 @@ import json
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "bottleneck_map"))
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
 
 from scoring import DEFAULT_WEIGHTS, binding_constraint, score_layers  # noqa: E402
 
-OUT = ROOT / "bottleneck_map" / "output"
-DASH = ROOT / "dashboard" / "public" / "data"
+OUT = HERE / "output"
 
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
-    DASH.mkdir(parents=True, exist_ok=True)
-    raw = json.loads((ROOT / "bottleneck_map" / "layers.json").read_text(encoding="utf-8"))
+    raw = json.loads((HERE / "layers.json").read_text(encoding="utf-8"))
     scored = score_layers(raw["layers"], DEFAULT_WEIGHTS)
     binder = binding_constraint(scored)
 
@@ -44,8 +42,7 @@ def main() -> None:
         "capital_flow": {"years": years, "absolute": series, "shares": shares,
                          "tag": cf["tag"], "note": cf["_note"]},
     }
-    for d in (OUT, DASH):
-        (d / "bottleneck.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    (OUT / "bottleneck.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     print("Tightness ranking (tightest first):")
     for s in scored:
