@@ -3,7 +3,7 @@
 Underwriting is fully formula-linked (NOI ramp, debt, levered cash flows, live IRR). The waterfall
 split is iterative (computed in waterfall.py), so the per-year LP/GP distributions are written as
 values with a conservation-check formula and live IRR() formulas on the LP and project rows.
-Conventions: blue = inputs, black = formulas, units in headers, parentheses for negatives.
+Conventions: black text throughout, formula-linked, units in headers, parentheses for negatives.
 """
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from openpyxl.utils import get_column_letter
 
 OUTDIR = Path(__file__).resolve().parent / "output"
 
-BLUE = Font(color="1D4ED8")
+BLUE = Font(color="0F172A")   # inputs rendered black (was blue) per preference
 BLACK = Font(color="0F172A")
 BOLD = Font(color="0F172A", bold=True)
 HEADWHITE = Font(color="FFFFFF", bold=True)
@@ -57,7 +57,7 @@ def build(d, tiers, u, w, sens, ccy="") -> Path:
     A = wb.active; A.title = "Assumptions"
     A.column_dimensions["A"].width = 32; A.column_dimensions["B"].width = 14
     A["A1"].value = f"Value-add deal — Assumptions ({ccy or 'currency-agnostic'})"; A["A1"].font = TITLE
-    A["A2"].value = "Blue = input. Edit and the Underwriting tab recalculates."; A["A2"].font = ITAL
+    A["A2"].value = "Edit these inputs and the Underwriting tab recalculates."; A["A2"].font = ITAL
     rows = [
         ("Purchase price", d.purchase_price, MONEY),
         ("In-place NOI", d.in_place_noi, MONEY),

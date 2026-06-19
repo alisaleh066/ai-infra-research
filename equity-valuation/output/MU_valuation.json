@@ -9,11 +9,11 @@
     2025
   ],
   "currency": "USD",
-  "price": 1138.053,
+  "price": 1133.99,
   "beta": 2.0,
-  "wacc": 0.14203155140991763,
-  "dcf_value_per_share": 13.070076881989149,
-  "enterprise_value_m": 17154.83649223779,
+  "wacc": 0.14202811411506203,
+  "dcf_value_per_share": 13.070531796165502,
+  "enterprise_value_m": 17155.34827068619,
   "comps": {
     "implied_ev": 217464.0,
     "value_per_share_ev_ebitda": 191.12266666666667,
@@ -22,14 +22,28 @@
   },
   "monte_carlo": {
     "n": 10000,
-    "mean": 13.538755073723095,
-    "median": 12.985929329854343,
-    "std": 8.487169846626603,
-    "p5": 0.7140068639360667,
-    "p25": 7.856645671597839,
-    "p50": 12.985929329854343,
-    "p75": 18.727251772880244,
-    "p95": 28.367147223062087
+    "mean": 13.539233969156607,
+    "median": 12.98636865818479,
+    "std": 8.487443451916121,
+    "p5": 0.7140794359766102,
+    "p25": 7.856921381496917,
+    "p50": 12.98636865818479,
+    "p75": 18.72791279723184,
+    "p95": 28.368009128697082
+  },
+  "scenarios": {
+    "Bear": {
+      "fair_value": 2.144905997572471,
+      "trigger": "demand air-pocket / margin compression / multiple de-rate"
+    },
+    "Base": {
+      "fair_value": 13.070531796165502,
+      "trigger": "current trajectory holds"
+    },
+    "Bull": {
+      "fair_value": 26.338372918619417,
+      "trigger": "demand stays tight / margins expand / lower risk premium"
+    }
   },
   "sensitivity": {
     "waccs": [
@@ -84,7 +98,7 @@
       ]
     ]
   },
-  "upside_vs_price": -0.9885154058009696,
+  "upside_vs_price": -0.9884738562102263,
   "assumptions": {
     "base_revenue_m": 37378.0,
     "rev_growth": [

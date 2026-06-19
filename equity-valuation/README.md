@@ -34,7 +34,7 @@ Or open **Anaconda Prompt** (where `python`/`pip`/`pytest` are already on PATH) 
   (revenue-weighted average margin & D&A, capex faded toward maintenance, CAGR-based growth fading
   to terminal), runs the engine, writes the Excel + JSON + chart.
 - **`valuation.py`** — the pure, unit-tested DCF/WACC/sensitivity/comps/Monte Carlo engine.
-- **`build_xlsx.py`** — linked Excel model (blue = inputs, black = formulas, Assumptions tab).
+- **`build_xlsx.py`** — formula-linked Excel model (black text, dedicated Assumptions tab).
 - **`xlsx_check.py`** — audits the workbook for formula errors.
 
 ## Analyst layer (the judgment, not just the machine)

@@ -1,6 +1,6 @@
 """build_xlsx — build a linked DCF workbook for ANY ticker.
 
-Conventions: blue = inputs, black = formulas, dedicated Assumptions tab, units in headers,
+Conventions: black text throughout, formula-linked, dedicated Assumptions tab, units in headers,
 parentheses for negatives, zero formula errors. Sheets: Assumptions, Model (income statement +
 FCFF projection), WACC, DCF, Sensitivity, Comps. All monetary values in USD millions.
 """
@@ -14,7 +14,7 @@ from openpyxl.utils import get_column_letter
 
 OUTDIR = Path(__file__).resolve().parent / "output"
 
-BLUE = Font(color="1D4ED8")
+BLUE = Font(color="0F172A")   # inputs rendered black (was blue) per preference
 BLACK = Font(color="0F172A")
 BOLD = Font(color="0F172A", bold=True)
 HEADWHITE = Font(color="FFFFFF", bold=True)
@@ -68,7 +68,7 @@ def build(fund, a, dcf, comps, waccs, growths, grid, summary, extras) -> Path:
     for col in "BCDEFGHIJKL":
         A.column_dimensions[col].width = 12
     A["A1"].value = f"{fund['name']} ({fund['ticker']}) — Valuation Assumptions"; A["A1"].font = TITLE
-    A["A2"].value = "Blue = input (editable). Fundamentals from SEC EDGAR; market/assumptions flagged."
+    A["A2"].value = "Editable inputs on this tab. Fundamentals from SEC EDGAR; market/assumptions flagged."
     A["A2"].font = ITAL
     rows = [
         ("Tax rate [ASSUMPTION]", a.tax_rate, PCT),
