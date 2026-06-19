@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @page { margin: 1.8cm; }
+  body { font-family: "Georgia", serif; color: #15233b; line-height: 1.5; font-size: 11.5pt; }
+  h1 { font-size: 24pt; color: #0d1422; margin: 0 0 2pt 0; }
+  h2 { font-size: 15pt; color: #0d1422; border-bottom: 2px solid #c69749; padding-bottom: 3px; margin-top: 22px; }
+  h3 { font-size: 12.5pt; color: #1d2c44; margin-bottom: 2px; }
+  .sub { color: #6b7280; font-size: 10pt; margin-top: 0; }
+  .gold { color: #9c7430; }
+  code, .mono { font-family: "Consolas","Courier New",monospace; font-size: 9.5pt; background:#f2efe7; padding:1px 4px; border-radius:3px; }
+  pre { background:#0d1422; color:#f6f3ec; padding:10px 12px; border-radius:5px; font-family:"Consolas",monospace; font-size:9pt; line-height:1.45; white-space:pre-wrap; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 10.5pt; }
+  th { background:#0d1422; color:#fff; text-align:left; padding:6px 8px; }
+  td { border-bottom:1px solid #dcd5c5; padding:6px 8px; vertical-align:top; }
+  .note { background:#f7f4ec; border-left:3px solid #c69749; padding:8px 12px; font-size:10pt; margin:10px 0; }
+  ul { margin-top:4px; }
+  .small { font-size: 9.5pt; color:#6b7280; }
+</style>
+</head>
+<body>
+
+<h1>projectsf — Investment Analysis Toolkit</h1>
+<p class="sub">A guide to the three projects: what they are, how to run them, what they produce, and what it all means.<br>
+Author: Ali Saleh Al Taher · Built with Python &amp; Excel · Research artifact, not investment advice.</p>
+
+<h2>1 &nbsp;What this is (the one-paragraph version)</h2>
+<p>Three self-contained tools that apply an engineer's discipline to investing: pull real data, build the model,
+test the assumptions, then take a view. Project&nbsp;1 values <em>any</em> US-listed stock from live filings.
+Project&nbsp;2 maps the AI-infrastructure supply chain to find where it is physically constrained. Project&nbsp;3
+underwrites a real-estate deal the way an institutional sponsor does, splitting the return between investors and
+the manager. Every number is either sourced from official filings or clearly flagged as an assumption.</p>
+
+<h2>2 &nbsp;The three projects</h2>
+
+<h3>1 — Equity Valuation &nbsp;<span class="small mono">projectsf\equity-valuation</span></h3>
+<p>Type a ticker; it pulls audited financials from the U.S. SEC (EDGAR) and a live share price, then builds a full
+valuation: a discounted-cash-flow (DCF) model with a cost-of-capital (WACC) build, a Bear/Base/Bull scenario band,
+a comparable-company cross-check, a Monte-Carlo simulation, and a one-click <strong>automated research note</strong>
+that scores the company on globally recognised techniques.</p>
+<table>
+<tr><th>Technique</th><th>What it answers</th></tr>
+<tr><td>DCF + WACC</td><td>What are the future cash flows worth today?</td></tr>
+<tr><td>DuPont ROE</td><td>Is the return driven by margins, efficiency, or leverage?</td></tr>
+<tr><td>ROIC vs WACC</td><td>Does the business actually create value?</td></tr>
+<tr><td>Piotroski F-Score</td><td>9-point fundamental strength check</td></tr>
+<tr><td>Altman Z-Score</td><td>Bankruptcy / financial-distress risk</td></tr>
+<tr><td>Beneish M-Score</td><td>Are the earnings possibly being manipulated?</td></tr>
+<tr><td>Sloan accruals</td><td>Are earnings backed by real cash?</td></tr>
+<tr><td>Reverse DCF</td><td>What growth is the current price already assuming?</td></tr>
+</table>
+
+<h3>2 — AI Bottleneck Map &nbsp;<span class="small mono">projectsf\ai-bottleneck-map</span></h3>
+<p>Scores each layer of the AI hardware chain (GPUs → high-bandwidth memory → advanced packaging → power &amp; grid →
+copper &amp; uranium) on a transparent <strong>"tightness"</strong> metric — utilisation, lead time, supply
+inelasticity, supplier concentration — to identify the <em>binding constraint</em> (currently advanced packaging /
+CoWoS) and show where investment capital is migrating. The thesis: own the bottleneck, not the headline chip.</p>
+
+<h3>3 — Real-Estate ROI &nbsp;<span class="small mono">projectsf\real-estate-roi</span></h3>
+<p>Underwrites a value-add property deal (buy → renovate → grow income → sell) and runs an institutional
+<strong>LP/GP equity waterfall</strong>: return of capital → preferred return → promote tiers. It reports project
+IRR, the investor (LP) IRR after the manager's cut, equity multiple, cash-on-cash, DSCR and debt yield — the exact
+mechanics Blackstone/BlackRock-style real-estate funds use.</p>
+
+<h2>3 &nbsp;How to run them</h2>
+<p><strong>Easiest — double-click (no typing):</strong></p>
+<ul>
+<li>Open <span class="mono">C:\Users\ali12\projectsf</span> in File Explorer, open a project folder.</li>
+<li>Double-click <span class="mono">setup.bat</span> once (installs dependencies). Wait for "Done", close it.</li>
+<li>Double-click <span class="mono">run.bat</span> to run, or <span class="mono">app.bat</span> for the visual web app.</li>
+</ul>
+<p><strong>From PowerShell</strong> (these call Anaconda's Python directly, so nothing needs to be on your PATH;
+PowerShell doesn't accept <span class="mono">&amp;&amp;</span>, so run one line at a time):</p>
+<pre>cd $env:USERPROFILE\projectsf\equity-valuation
+&amp; "$env:USERPROFILE\anaconda3\python.exe" -m pip install -r requirements.txt
+&amp; "$env:USERPROFILE\anaconda3\python.exe" value.py MU      # valuation of any ticker
+&amp; "$env:USERPROFILE\anaconda3\python.exe" analyze.py MU    # full research note
+&amp; "$env:USERPROFILE\anaconda3\python.exe" -m streamlit run app.py   # web app</pre>
+<p class="small">Projects 2 &amp; 3 are the same pattern: <span class="mono">build.py</span> (bottleneck) and
+<span class="mono">roi.py</span> (real estate). The web app for any project is <span class="mono">app.bat</span>.</p>
+
+<h2>4 &nbsp;What outputs each model produces</h2>
+<p>Outputs are <strong>regenerated every time you run</strong> and land in each project's <span class="mono">output\</span> folder.</p>
+<table>
+<tr><th>Model</th><th>Outputs &amp; what they mean</th></tr>
+<tr><td>Equity Valuation<br><span class="small">value.py</span></td>
+<td><span class="mono">&lt;TICKER&gt;_valuation.xlsx</span> — the full DCF model with live formulas ·
+<span class="mono">_valuation.json</span> — the same results as data ·
+<span class="mono">_montecarlo.png</span> — the fair-value distribution chart · plus a console summary.</td></tr>
+<tr><td>Research note<br><span class="small">analyze.py</span></td>
+<td><span class="mono">&lt;TICKER&gt;_research.md</span> — a written analyst note (reads like a one-pager) ·
+<span class="mono">_analysis.xlsx</span> — every ratio/score in one workbook.</td></tr>
+<tr><td>MU thesis<br><span class="small">mu_thesis_model.py</span></td>
+<td><span class="mono">MU_thesis.json</span> — the Bear/Base/Bull scenario fair values + the written memo in <span class="mono">THESIS_MU.md</span>.</td></tr>
+<tr><td>Bottleneck Map<br><span class="small">build.py</span></td>
+<td><span class="mono">bottleneck.json</span> — the scored layers (data the web app draws) · a console ranking ·
+the visual lives in the <span class="mono">app.bat</span> web app.</td></tr>
+<tr><td>Real-Estate ROI<br><span class="small">roi.py</span></td>
+<td><span class="mono">deal_underwriting.xlsx</span> — underwriting + the LP/GP waterfall with live formulas ·
+<span class="mono">&lt;deal&gt;_roi.json</span> — all results as data · console summary.</td></tr>
+</table>
+<p class="note"><strong>Yes — that is the nice part:</strong> the Excel files aren't dead screenshots. They contain the
+<em>live equations</em> — DCF discounting, WACC, IRR, the waterfall — all linked to a blue-free Assumptions tab.
+Change an input cell and Excel recalculates the whole model in real time. The Python builds the workbook; Excel lets
+you stress it by hand. (The numbers are verified to match the Python engine under a real recalculation.)</p>
+
+<h2>5 &nbsp;The Micron (MU) analysis — what it means &amp; what I did</h2>
+<p><strong>What I did.</strong> Rather than let the tool auto-pick assumptions, I built a deliberate, hand-made model
+of Micron through the memory cycle: three scenarios (Bear / Base / Bull), each with an explicit revenue-growth path,
+margin path, capex assumption and discount rate — every driver chosen and footnoted in <span class="mono">THESIS_MU.md</span>.
+The financials underneath are real (audited SEC filings); the judgement is mine and written down.</p>
+<p><strong>What it means.</strong> Micron is the cleanest listed way to own <em>high-bandwidth memory (HBM)</em> — one of
+the tightest links in the AI chain (it connects directly to Project&nbsp;2). The model says this is <em>not</em> a cheap
+stock on a normalised mid-cycle; it is an <strong>asymmetric bet on HBM staying scarce</strong>:</p>
+<table>
+<tr><th>Scenario</th><th>Fair value / share</th><th>It hinges on</th></tr>
+<tr><td>Bear (25%)</td><td>~$12</td><td>Memory oversupply returns; margins collapse</td></tr>
+<tr><td>Base (50%)</td><td>~$60</td><td>HBM tight into 2026, DRAM cycle normalises</td></tr>
+<tr><td>Bull (25%)</td><td>~$127</td><td>HBM stays the binding constraint; structurally higher margins</td></tr>
+</table>
+<p>The recommendation that falls out: <strong>accumulate on weakness, size for the cycle</strong> — a conviction
+position, not a core holding, re-underwritten at every capex update. The three swing factors are HBM share/pricing,
+where mid-cycle margins settle, and capex discipline. It would be <em>wrong</em> if Samsung qualifies HBM at scale or
+hyperscaler AI spending digests. (These fair values are independent of the live share price, so they hold regardless
+of any given day's quote.)</p>
+
+<h2>6 &nbsp;Honesty &amp; limitations</h2>
+<ul>
+<li>Fundamentals are audited 10-K values from SEC EDGAR; anything a filing doesn't provide is flagged, never invented.</li>
+<li>Scenario drivers and peer multiples are explicit, editable assumptions — the models are decision tools, not oracles.</li>
+<li>Coverage is US-listed companies (EDGAR). Prices come from a free public feed; always sanity-check the quote.</li>
+<li>This is a research / portfolio artifact and <strong>not investment advice.</strong></li>
+</ul>
+
+<p class="small" style="margin-top:18px;">Read alongside: <span class="mono">INVESTMENT_THESIS.md</span> (the through-line),
+and each project's <span class="mono">README.md</span> and <span class="mono">THESIS.md</span>.</p>
+
+</body>
+</html>
