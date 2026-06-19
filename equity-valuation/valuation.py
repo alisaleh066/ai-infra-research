@@ -184,7 +184,6 @@ def monte_carlo(a: DCFAssumptions, spec: MonteCarloSpec) -> dict:
     rng = np.random.default_rng(spec.seed)
     base_w = wacc(a)
     out = np.empty(spec.n)
-    n_horizon = len(a.rev_growth)
     for i in range(spec.n):
         g_shock = rng.normal(0, spec.rev_growth_sd)
         m_shock = rng.normal(0, spec.ebit_margin_sd)

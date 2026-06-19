@@ -85,7 +85,7 @@ def main() -> None:
     print(f"Equity invested  : {cur}{u['equity']:,.0f}   loan {cur}{u['loan']:,.0f} (LTV {u['ltv']:.0%}, LTC {u['ltc']:.0%})")
     print(f"Debt yield       : {u['debt_yield']:.1%}   min DSCR {u['min_dscr']:.2f}x")
     print(f"Stabilized NOI   : {cur}{u['stabilized_noi']:,.0f}   exit value {cur}{u['exit_value']:,.0f}")
-    print(f"--- returns ---")
+    print("--- returns ---")
     print(f"Project IRR      : {u['project_irr']:.1%}   equity multiple {u['equity_multiple']:.2f}x   avg CoC {u['avg_cash_on_cash']:.1%}")
     print(f"LP   IRR         : {w['lp_irr']:.1%}   LP equity multiple {w['lp_equity_multiple']:.2f}x")
     print(f"GP   promote     : {cur}{w['gp_promote']:,.0f}   ({w['gp_share_of_profit']:.1%} of profit)   promote drag {w['promote_drag']:.1%}")

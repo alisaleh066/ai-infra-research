@@ -9,7 +9,6 @@ Reads alongside THESIS_MU.md.
 """
 from __future__ import annotations
 
-import dataclasses
 import json
 from pathlib import Path
 

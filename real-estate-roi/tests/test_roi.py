@@ -7,7 +7,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from underwrite import Deal, equity_cash_flows, irr, npv, underwrite  # noqa: E402
-from waterfall import WaterfallTiers, run_waterfall  # noqa: E402
+from waterfall import run_waterfall  # noqa: E402
 
 
 def deal(**over) -> Deal:

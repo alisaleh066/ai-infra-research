@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 import data as datamod
 from valuation import (
     DCFAssumptions, MonteCarloSpec, comps_valuation, enterprise_value, monte_carlo,
-    sensitivity_grid, wacc,
+    sensitivity_grid,
 )
 import build_xlsx
 
@@ -255,7 +255,7 @@ def run(ticker: str, price_override: float | None = None) -> dict:
     xlsx = build_xlsx.build(fund, a, dcf, comps, waccs, growths, grid, summary, extras)
 
     _print(summary, dcf)
-    print(f"\nWrote: {OUT / (fund['ticker'] + '_valuation.xlsx')}")
+    print(f"\nWrote: {xlsx}")
     print(f"Wrote: {OUT / (fund['ticker'] + '_valuation.json')}")
     return summary
 
