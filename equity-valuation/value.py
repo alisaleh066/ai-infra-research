@@ -169,6 +169,36 @@ def build_assumptions(fund: dict, price: float | None, beta: float | None) -> tu
     return a, extras
 
 
+def scenario_band(a: DCFAssumptions, base_wacc: float) -> dict:
+    """Bear / Base / Bull fair values by shifting the key drivers around the base case.
+
+    Generic, transparent deltas (an analyst replaces these with named, defended drivers per name —
+    see mu_thesis_model.py for the worked example). Headline alongside Monte Carlo.
+    """
+    cases = {
+        "Bear": {"g": -0.03, "m": -0.04, "w": +0.015, "tg": -0.005,
+                 "trigger": "demand air-pocket / margin compression / multiple de-rate"},
+        "Base": {"g": 0.0, "m": 0.0, "w": 0.0, "tg": 0.0,
+                 "trigger": "current trajectory holds"},
+        "Bull": {"g": +0.03, "m": +0.03, "w": -0.010, "tg": +0.005,
+                 "trigger": "demand stays tight / margins expand / lower risk premium"},
+    }
+    out = {}
+    for name, c in cases.items():
+        a2 = dataclasses.replace(
+            a,
+            rev_growth=[g + c["g"] for g in a.rev_growth],
+            ebit_margin=[min(max(m + c["m"], 0.0), 0.6) for m in a.ebit_margin],
+            terminal_growth=a.terminal_growth + c["tg"],
+        )
+        fv = enterprise_value(a2, wacc_rate=max(base_wacc + c["w"], 0.02))["value_per_share"]
+        out[name] = {"fair_value": fv, "trigger": c["trigger"]}
+    return out
+
+
+import dataclasses  # noqa: E402
+
+
 def run(ticker: str, price_override: float | None = None) -> dict:
     OUT.mkdir(exist_ok=True)
     fund = datamod.fetch_fundamentals(ticker)
@@ -191,6 +221,7 @@ def run(ticker: str, price_override: float | None = None) -> dict:
     comps = comps_valuation(extras["ebitda"], extras["eps"] or 0.0, extras["net_debt"],
                             a.shares, ev_ebitda_mult=12.0, pe_mult=18.0)  # ASSUMPTION multiples
     mc = monte_carlo(a, MonteCarloSpec(n=10000, seed=42))
+    scenarios = scenario_band(a, w)
 
     upside = (dcf["value_per_share"] / price - 1) if price else None
     summary = {
@@ -201,6 +232,7 @@ def run(ticker: str, price_override: float | None = None) -> dict:
         "enterprise_value_m": dcf["enterprise_value"],
         "comps": comps,
         "monte_carlo": {k: v for k, v in mc.items() if k != "samples"},
+        "scenarios": scenarios,
         "sensitivity": {"waccs": waccs, "growths": growths, "grid": grid},
         "upside_vs_price": upside,
         "assumptions": {
@@ -245,8 +277,11 @@ def _print(s, dcf):
     print(f"  WACC                 : {s['wacc']:.2%}  (beta {s['beta']})")
     print(f"  DCF value / share    : ${dcf['value_per_share']:,.2f}")
     print(f"  Comps midpoint /share: ${s['comps']['midpoint']:,.2f}")
+    sc = s["scenarios"]
+    print(f"  Scenarios            : Bear ${sc['Bear']['fair_value']:,.2f}  |  "
+          f"Base ${sc['Base']['fair_value']:,.2f}  |  Bull ${sc['Bull']['fair_value']:,.2f}")
     mc = s["monte_carlo"]
-    print(f"  Monte Carlo median   : ${mc['median']:,.2f}  (P5 ${mc['p5']:,.2f} – P95 ${mc['p95']:,.2f})")
+    print(f"  Monte Carlo median   : ${mc['median']:,.2f}  (P5 ${mc['p5']:,.2f} - P95 ${mc['p95']:,.2f})")
     if s["price"] is not None:
         arrow = "+" if (s["upside_vs_price"] or 0) >= 0 else ""
         print(f"  Price                : ${s['price']:,.2f}  -> upside {arrow}{s['upside_vs_price']:.1%}")

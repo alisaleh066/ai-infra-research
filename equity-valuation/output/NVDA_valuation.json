@@ -1,0 +1,133 @@
+{
+  "ticker": "NVDA",
+  "company": "NVIDIA CORP",
+  "cik": "0001045810",
+  "fiscal_years": [
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "currency": "USD",
+  "price": 210.69,
+  "beta": 2.0,
+  "wacc": 0.14283058508861693,
+  "dcf_value_per_share": 59.53661987579329,
+  "enterprise_value_m": 1457343.6996351967,
+  "comps": {
+    "implied_ev": 1598760.0,
+    "value_per_share_ev_ebitda": 65.30541731255609,
+    "value_per_share_pe": 88.2,
+    "midpoint": 76.75270865627805
+  },
+  "monte_carlo": {
+    "n": 10000,
+    "mean": 60.6200697614938,
+    "median": 59.39958327958981,
+    "std": 12.484850737811083,
+    "p5": 42.39408848963253,
+    "p25": 51.761696760142385,
+    "p50": 59.39958327958981,
+    "p75": 67.99172557356304,
+    "p95": 83.21102861022335
+  },
+  "scenarios": {
+    "Bear": {
+      "fair_value": 42.934542336969386,
+      "trigger": "demand air-pocket / margin compression / multiple de-rate"
+    },
+    "Base": {
+      "fair_value": 59.53661987579329,
+      "trigger": "current trajectory holds"
+    },
+    "Bull": {
+      "fair_value": 78.77185491901068,
+      "trigger": "demand stays tight / margins expand / lower risk premium"
+    }
+  },
+  "sensitivity": {
+    "waccs": [
+      0.1278,
+      0.1353,
+      0.1428,
+      0.1503,
+      0.1578
+    ],
+    "growths": [
+      0.015,
+      0.02,
+      0.025,
+      0.03,
+      0.035
+    ],
+    "grid": [
+      [
+        64.31302975390585,
+        66.39931661615583,
+        68.68854967123167,
+        71.21185563582448,
+        74.00706957073976
+      ],
+      [
+        60.08418042997303,
+        61.865298700789985,
+        63.80789641592398,
+        65.93497634522073,
+        68.27412805211438
+      ],
+      [
+        56.35614522105556,
+        57.889420371782975,
+        59.55285470338708,
+        61.3637566175802,
+        63.342645722329266
+      ],
+      [
+        53.045517305596796,
+        54.37518633487263,
+        55.81097420128142,
+        57.36611268002676,
+        59.05612873715417
+      ],
+      [
+        50.0864165496948,
+        51.24711295333535,
+        52.49521119459944,
+        53.84096970513302,
+        55.29631767092176
+      ]
+    ]
+  },
+  "upside_vs_price": -0.7174207609483445,
+  "assumptions": {
+    "base_revenue_m": 215938.0,
+    "rev_growth": [
+      0.3,
+      0.2313,
+      0.1625,
+      0.0938,
+      0.025
+    ],
+    "ebit_margin": [
+      0.5734,
+      0.5734,
+      0.5734,
+      0.5734,
+      0.5734
+    ],
+    "tax_rate": 0.21,
+    "da_pct_rev": 0.0179,
+    "capex_pct_rev": 0.023,
+    "terminal_growth": 0.025,
+    "risk_free": 0.043,
+    "erp": 0.05,
+    "pretax_kd": 0.05,
+    "debt_m": 8468.0,
+    "cash_m": 10605.0,
+    "shares_m": 24514.0
+  },
+  "data_flags": [],
+  "assumption_notes": [],
+  "price_flag": null,
+  "sources": "Fundamentals: SEC EDGAR (10-K). Price: Yahoo Finance. Assumptions derived from company history + documented defaults; edit in the xlsx Assumptions tab."
+}

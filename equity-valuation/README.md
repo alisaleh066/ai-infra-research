@@ -37,6 +37,16 @@ Or open **Anaconda Prompt** (where `python`/`pip`/`pytest` are already on PATH) 
 - **`build_xlsx.py`** — linked Excel model (blue = inputs, black = formulas, Assumptions tab).
 - **`xlsx_check.py`** — audits the workbook for formula errors.
 
+## Analyst layer (the judgment, not just the machine)
+- **`THESIS_MU.md`** — a one-page IC memo on Micron: recommendation, base/bull/bear price targets,
+  variant perception, the 3 drivers, kill criteria, catalysts, and sizing.
+- **`mu_thesis_model.py`** — a *hand-built* scenario DCF for MU (HBM-cycle driver paths, every
+  assumption footnoted) — depth on one name vs the auto-derived baseline:
+  `& "$env:USERPROFILE\anaconda3\python.exe" mu_thesis_model.py`
+- **`comps_live.py`** — real, live peer-median multiples (EV/EBITDA, EV/Sales, P/E) from a memory/
+  semis peer set: `& "$env:USERPROFILE\anaconda3\python.exe" comps_live.py MU`
+- Every `value.py` run also prints a **Bear / Base / Bull** scenario band (not just Monte Carlo).
+
 ## Honesty / limitations
 - **Nothing is fabricated.** Any line the filing doesn't tag is flagged (printed + in the JSON),
   never invented. Beta is clamped to a sane range; risk-free, ERP, tax and peer multiples are

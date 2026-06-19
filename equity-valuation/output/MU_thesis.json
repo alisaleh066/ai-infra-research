@@ -1,0 +1,90 @@
+{
+  "company": "MICRON TECHNOLOGY INC",
+  "ticker": "MU",
+  "fiscal_years": [
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "base_revenue_m": 37378.0,
+  "shares_m": 1125.0,
+  "net_debt_m": 2451.0,
+  "price_at_run": 1133.99,
+  "scenarios": {
+    "Bear": {
+      "prob": 0.25,
+      "wacc": 0.125,
+      "terminal_growth": 0.02,
+      "fair_value": 12.27,
+      "trigger": "DRAM/HBM oversupply by FY27: Samsung HBM3E qualifies at scale, hyperscaler capex digestion, pricing rolls over.",
+      "rev_growth": [
+        0.05,
+        -0.1,
+        0.06,
+        0.08,
+        0.06
+      ],
+      "ebit_margin": [
+        0.22,
+        0.1,
+        0.14,
+        0.18,
+        0.2
+      ],
+      "capex_pct": 0.34
+    },
+    "Base": {
+      "prob": 0.5,
+      "wacc": 0.11,
+      "terminal_growth": 0.025,
+      "fair_value": 60.08,
+      "trigger": "HBM stays tight into 2026, MU holds ~20-25% HBM share; DRAM cycle normalises rather than crashes.",
+      "rev_growth": [
+        0.2,
+        0.1,
+        0.06,
+        0.05,
+        0.04
+      ],
+      "ebit_margin": [
+        0.3,
+        0.3,
+        0.27,
+        0.25,
+        0.24
+      ],
+      "capex_pct": 0.32
+    },
+    "Bull": {
+      "prob": 0.25,
+      "wacc": 0.1,
+      "terminal_growth": 0.03,
+      "fair_value": 126.64,
+      "trigger": "HBM remains the binding constraint through 2027; memory consolidates to a 3-player rational oligopoly; AI memory content/box keeps rising.",
+      "rev_growth": [
+        0.28,
+        0.16,
+        0.1,
+        0.07,
+        0.05
+      ],
+      "ebit_margin": [
+        0.36,
+        0.37,
+        0.34,
+        0.31,
+        0.29
+      ],
+      "capex_pct": 0.31
+    }
+  },
+  "probability_weighted_fair_value": 64.77,
+  "comps_live": {
+    "median_ev_ebitda": 77.63,
+    "median_pe": 116.0,
+    "n": 6,
+    "note": "Live peer medians; sanity-check the price feed before quoting."
+  },
+  "method": "Hand-built scenario DCF on real EDGAR fundamentals. Drivers are explicit analyst judgment (see THESIS_MU.md). Fair value is price-independent."
+}

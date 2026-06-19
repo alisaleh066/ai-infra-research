@@ -27,4 +27,12 @@ Each project has the same launchers — **double-click**, no setup hassle:
   Python engines under a real recalculation.
 - Research / portfolio artifacts — **not investment advice.**
 
+## The view, not just the tools
+Each project ends in a **written recommendation** — a variant perception, kill criteria, and
+catalysts, not just a number:
+- [`INVESTMENT_THESIS.md`](INVESTMENT_THESIS.md) — the through-line tying all three to a live process.
+- [`equity-valuation/THESIS_MU.md`](equity-valuation/THESIS_MU.md) — IC memo on Micron (base/bull/bear).
+- [`ai-bottleneck-map/THESIS.md`](ai-bottleneck-map/THESIS.md) — where the constraint binds and capital migrates.
+- [`real-estate-roi/THESIS.md`](real-estate-roi/THESIS.md) — when the LP/GP waterfall makes you take or pass a deal.
+
 See each project's README for methodology, commands, and limitations.
