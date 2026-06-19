@@ -65,6 +65,28 @@ TAGS = {
         "WeightedAverageNumberOfSharesOutstandingBasic",
         "CommonStockSharesOutstanding",
     ],
+    # --- extra lines for financial-statement & forensic analysis (analyze.py) ---
+    "total_assets": ["Assets"],
+    "total_liabilities": ["Liabilities"],
+    "current_assets": ["AssetsCurrent"],
+    "current_liabilities": ["LiabilitiesCurrent"],
+    "equity": [
+        "StockholdersEquity",
+        "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+    ],
+    "retained_earnings": ["RetainedEarningsAccumulatedDeficit"],
+    "gross_profit": ["GrossProfit"],
+    "cogs": ["CostOfGoodsAndServicesSold", "CostOfRevenue", "CostOfGoodsSold"],
+    "receivables": ["AccountsReceivableNetCurrent", "ReceivablesNetCurrent"],
+    "ppe_net": ["PropertyPlantAndEquipmentNet"],
+    "cfo": [
+        "NetCashProvidedByUsedInOperatingActivities",
+        "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations",
+    ],
+    "sga": [
+        "SellingGeneralAndAdministrativeExpense",
+        "GeneralAndAdministrativeExpense",
+    ],
 }
 
 
@@ -168,11 +190,14 @@ def fetch_fundamentals(ticker: str) -> dict:
                               for y in set(dep) | set(amort)}
     # union of fiscal years we actually have for revenue (the anchor)
     years = sorted(concepts["revenue"].keys())[-4:] if concepts["revenue"] else []
+    # Only the core valuation inputs are flagged loudly; extended (analysis) lines are optional.
+    core = {"revenue", "operating_income", "net_income", "eps_diluted", "da", "capex",
+            "cash", "long_term_debt", "short_term_debt", "shares"}
     flags: list[str] = []
 
     def series(concept: str) -> dict:
         s = concepts[concept]
-        if not s:
+        if not s and concept in core:
             flags.append(concept)
         return {y: s.get(y) for y in years}
 
@@ -183,18 +208,10 @@ def fetch_fundamentals(ticker: str) -> dict:
         "years": years,
         "units": "USD (absolute)",
         "source": "SEC EDGAR companyfacts (10-K, us-gaap)",
-        "revenue": series("revenue"),
-        "operating_income": series("operating_income"),
-        "net_income": series("net_income"),
-        "eps_diluted": series("eps_diluted"),
-        "da": series("da"),
-        "capex": series("capex"),
-        "cash": series("cash"),
-        "long_term_debt": series("long_term_debt"),
-        "short_term_debt": series("short_term_debt"),
-        "shares": series("shares"),
         "missing_flags": flags,
     }
+    for concept in TAGS:                       # every concept (core + extended) goes in
+        fund[concept] = series(concept)
     return fund
 
 

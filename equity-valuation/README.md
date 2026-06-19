@@ -37,6 +37,18 @@ Or open **Anaconda Prompt** (where `python`/`pip`/`pytest` are already on PATH) 
 - **`build_xlsx.py`** — formula-linked Excel model (black text, dedicated Assumptions tab).
 - **`xlsx_check.py`** — audits the workbook for formula errors.
 
+## Automated research workup (`analyze.py`)
+One command runs a full battery of recognized techniques on any ticker and writes a research note
++ Excel:
+```powershell
+& "$env:USERPROFILE\anaconda3\python.exe" analyze.py NVDA
+```
+Outputs `output/<TICKER>_research.md` (reads like an analyst note) and `output/<TICKER>_analysis.xlsx`.
+Techniques (all standard, citable): ratios + **DuPont** ROE decomposition · **ROIC vs WACC** (value
+creation) · **Piotroski F-Score** · **Altman Z-Score** · **Beneish M-Score** · **Sloan accruals** ·
+**reverse DCF** (growth implied by the price). Every score degrades gracefully — missing lines show
+`n/a`, never fabricated. Score formulas live in `analysis.py` and are unit-tested.
+
 ## Analyst layer (the judgment, not just the machine)
 - **`THESIS_MU.md`** — a one-page IC memo on Micron: recommendation, base/bull/bear price targets,
   variant perception, the 3 drivers, kill criteria, catalysts, and sizing.
