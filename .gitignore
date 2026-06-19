@@ -7,25 +7,17 @@ __pycache__/
 .venv/
 venv/
 
-# Node / Next.js
-node_modules/
-dashboard/.next/
-dashboard/out/
-dashboard/.turbo/
-npm-debug.log*
+# Fetched data caches (refetchable from the internet)
+*/cache/
 
 # Env / secrets
 .env
 .env.local
-*.local
 
 # OS
 .DS_Store
 Thumbs.db
-
-# Keep cached data committed (offline-after-first-run), but ignore scratch
-data/cache/*.tmp
 *.log
 
-# Playwright MCP artifacts
-dashboard/.playwright-mcp/
+# LibreOffice recalc scratch
+*/output/_rc/

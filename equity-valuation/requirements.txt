@@ -1,0 +1,8 @@
+# Equity valuation — Python deps (Anaconda Python 3.12). Install: setup.bat
+requests==2.32.2
+numpy==1.26.4
+matplotlib==3.10.0
+openpyxl==3.1.2
+pytest==7.4.4
+streamlit==1.37.1
+pandas==2.2.2
