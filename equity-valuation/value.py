@@ -261,4 +261,8 @@ if __name__ == "__main__":
     ap.add_argument("ticker", help="e.g. MU, AAPL, NVDA")
     ap.add_argument("--price", type=float, default=None, help="override fetched price")
     args = ap.parse_args()
-    run(args.ticker, args.price)
+    try:
+        run(args.ticker, args.price)
+    except ValueError as e:
+        print(f"\n{e}\nTip: use a US-listed ticker as it appears on SEC EDGAR (e.g. MU, AAPL, NVDA).")
+        raise SystemExit(1)
