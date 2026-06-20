@@ -21,6 +21,57 @@ def v(fund: dict, concept: str, year: int):
     return fund.get(concept, {}).get(year)
 
 
+# --------------------------------------------------------------------------- Recommendation
+def recommend(rep: dict) -> dict:
+    """Synthesize BUY / HOLD / SELL from valuation upside + quality/forensic scores.
+
+    Transparent point system (every contribution is listed in 'rationale'). `rep` must contain the
+    metric blocks plus 'upside' (DCF fair value / price - 1; may be None).
+    """
+    pts = 0
+    rationale: list[str] = []
+
+    def add(p, msg):
+        nonlocal pts
+        pts += p
+        rationale.append(f"{'+' if p >= 0 else ''}{p}  {msg}")
+
+    up = rep.get("upside")
+    if up is not None:
+        if up > 0.20: add(2, f"DCF upside {up:+.0%} (cheap vs intrinsic)")
+        elif up > 0.0: add(1, f"DCF upside {up:+.0%} (modestly cheap)")
+        elif up > -0.20: add(-1, f"DCF downside {up:+.0%} (slightly rich)")
+        else: add(-2, f"DCF downside {up:+.0%} (expensive vs intrinsic)")
+
+    rw = rep.get("roic_vs_wacc", {})
+    if rw.get("creates_value") is True: add(1, "ROIC exceeds WACC (value-creating)")
+    elif rw.get("value_spread") is not None: add(-1, "ROIC below WACC (value-destroying)")
+
+    f = rep.get("piotroski", {}).get("score")
+    if f is not None:
+        if f >= 7: add(1, f"Piotroski F {f}/9 (strong)")
+        elif f <= 3: add(-1, f"Piotroski F {f}/9 (weak)")
+
+    az = rep.get("altman_z", {}).get("zone")
+    if az == "safe": add(1, "Altman Z safe")
+    elif az == "distress": add(-2, "Altman Z in distress zone")
+
+    bm = rep.get("beneish_m", {}).get("flag")
+    if bm == "possible manipulation": add(-2, "Beneish M flags earnings quality")
+    elif bm == "clean": add(1, "Beneish M clean")
+
+    sl = rep.get("sloan", {}).get("quality")
+    if sl == "low": add(-1, "High accruals (low earnings quality)")
+
+    if pts >= 4:
+        rating = "BUY"
+    elif pts <= -2:
+        rating = "SELL"
+    else:
+        rating = "HOLD"
+    return {"rating": rating, "score": pts, "rationale": rationale}
+
+
 def _latest_two(fund: dict) -> tuple[int | None, int | None]:
     ys = fund["years"]
     return (ys[-1] if ys else None, ys[-2] if len(ys) > 1 else None)
