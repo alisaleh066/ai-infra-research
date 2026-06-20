@@ -9,8 +9,13 @@ tests). Built for Windows + Anaconda Python. No API keys required.
 | 2 | [`ai-bottleneck-map/`](ai-bottleneck-map/) | Score the **AI-infrastructure supply chain** on a transparent *tightness* metric, find the **binding constraint**, and show where capital migrates. |
 | 3 | [`real-estate-roi/`](real-estate-roi/) | **Institutional real-estate ROI**: value-add underwriting + an **LP/GP equity waterfall** (preferred return + promote tiers) — IRR, equity multiple, cash-on-cash, DSCR, debt yield. |
 
-## Running anything (Windows)
-Each project has the same launchers — **double-click**, no setup hassle:
+## Easiest start: `START.bat`
+**Double-click `START.bat` in this folder** — one menu launches any of the three projects (run or
+web app), so you never need to remember which folder or file. (Run each project's `setup.bat` once
+first to install its dependencies.)
+
+## Running a project directly (Windows)
+Each project also has the same launchers — **double-click**, no setup hassle:
 - **`setup.bat`** — installs that project's dependencies (uses your Anaconda Python directly).
 - **`run.bat`** — runs it (Project 1: `run.bat AAPL`).
 - **`app.bat`** — optional Streamlit web app.
