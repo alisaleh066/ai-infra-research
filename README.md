@@ -1,4 +1,4 @@
-# projectsf — three independent investment-analysis tools
+# project— three independent investment-analysis tools
 
 ![tests](https://github.com/alisaleh066/ai-infra-research/actions/workflows/tests.yml/badge.svg)
 
