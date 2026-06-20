@@ -6,8 +6,11 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from underwrite import Deal, equity_cash_flows, irr, npv, underwrite  # noqa: E402
-from waterfall import run_waterfall  # noqa: E402
+from underwrite import (  # noqa: E402
+    Deal, debt_schedule, debt_service, equity_cash_flows, irr, npv, underwrite,
+)
+from waterfall import WaterfallTiers, run_waterfall  # noqa: E402
+from roi import monte_carlo_deal  # noqa: E402
 
 
 def deal(**over) -> Deal:
@@ -91,6 +94,38 @@ def test_higher_return_raises_gp_share():
     weak = run_waterfall([-1_000_000, 50_000, 50_000, 50_000, 50_000, 1_300_000])
     strong = run_waterfall([-1_000_000, 90_000, 90_000, 90_000, 90_000, 2_600_000])
     assert strong["gp_share_of_profit"] > weak["gp_share_of_profit"]
+
+
+# ---------------------------------------------------------------- amortisation / refinance / MC
+def test_amortisation_pays_down_balance():
+    io = underwrite(deal(amortization_years=0))
+    am = underwrite(deal(amortization_years=25))
+    assert io["exit_loan_balance"] == pytest.approx(io["loan"])     # IO: balance unchanged
+    assert am["exit_loan_balance"] < am["loan"]                     # amortising: paid down
+    assert debt_service(deal(amortization_years=25)) > debt_service(deal(amortization_years=0))
+
+
+def test_refinance_returns_cash_and_lifts_irr():
+    base = deal()
+    refi = deal(refinance_year=3, refinance_ltv=0.70)
+    u_base, u_refi = underwrite(base), underwrite(refi)
+    assert u_refi["refinance_cash_out"] > 0                         # cash-out distribution
+    assert len(u_refi["cash_flows"]) == base.hold_years + 1
+    # returning capital early raises the project IRR
+    assert u_refi["project_irr"] >= u_base["project_irr"]
+
+
+def test_debt_schedule_conserves():
+    sched = debt_schedule(deal(amortization_years=20))
+    for r in sched:
+        assert r["payment"] >= 0 and r["balance"] >= 0
+
+
+def test_monte_carlo_deal_distribution():
+    mc = monte_carlo_deal(deal(), WaterfallTiers(), n=800, seed=1)
+    assert mc["n"] > 0
+    assert mc["lp_irr_p5"] < mc["lp_irr_p50"] < mc["lp_irr_p95"]
+    assert 0.0 <= mc["p_clears_pref"] <= 1.0
 
 
 def test_lp_achieving_exactly_pref_gets_no_promote():

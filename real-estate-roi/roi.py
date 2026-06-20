@@ -29,6 +29,37 @@ def load_deal(path: Path):
     return d, tiers, cfg.get("currency", "")
 
 
+def monte_carlo_deal(d: Deal, tiers: WaterfallTiers, n: int = 5000, seed: int = 42) -> dict:
+    """Distribution of LP IRR when rent growth, exit cap and interest rate are uncertain.
+
+    Quantifies risk: probability of clearing the preferred return, and the percentile band.
+    """
+    import numpy as np
+    rng = np.random.default_rng(seed)
+    pref = tiers.rates()[0]
+    out = []
+    for _ in range(n):
+        d2 = dataclasses.replace(
+            d,
+            post_stabilize_growth=max(d.post_stabilize_growth + rng.normal(0, 0.015), -0.05),
+            exit_cap=max(d.exit_cap + rng.normal(0, 0.0075), 0.03),
+            interest_rate=max(d.interest_rate + rng.normal(0, 0.0075), 0.01),
+        )
+        lp = run_waterfall(equity_cash_flows(d2), tiers)["lp_irr"]
+        if lp == lp:  # not nan
+            out.append(lp)
+    arr = np.array(out)
+    pct = np.percentile(arr, [5, 25, 50, 75, 95])
+    return {
+        "n": int(arr.size),
+        "p_clears_pref": float((arr >= pref).mean()),
+        "pref": pref,
+        "lp_irr_mean": float(arr.mean()),
+        "lp_irr_p5": float(pct[0]), "lp_irr_p25": float(pct[1]), "lp_irr_p50": float(pct[2]),
+        "lp_irr_p75": float(pct[3]), "lp_irr_p95": float(pct[4]),
+    }
+
+
 def sensitivity(d: Deal, tiers: WaterfallTiers, exit_caps, uplifts) -> dict:
     """LP IRR grid over exit cap (rows) x NOI uplift (cols)."""
     grid = []
@@ -62,6 +93,8 @@ def main() -> None:
     su = underwrite(stress_deal)
     sw = run_waterfall(su["cash_flows"], tiers)
 
+    mc = monte_carlo_deal(d, tiers)
+
     summary = {
         "currency": ccy, "deal": dataclasses.asdict(d), "tiers": tiers.hurdles,
         "underwriting": {k: v for k, v in u.items() if k != "cash_flows"},
@@ -72,6 +105,7 @@ def main() -> None:
         "downside_stress": {"project_irr": su["project_irr"], "equity_multiple": su["equity_multiple"],
                             "lp_irr": sw["lp_irr"], "min_dscr": su["min_dscr"],
                             "assumptions": "exit cap +0.75pp, uplift -15pp, rate +1.5pp"},
+        "monte_carlo": mc,
         "notes": "Assumption-driven, transparent institutional model. Edit deal.sample.json. "
                  "GP co-invest = 0 (earns only promote). Not investment advice.",
     }
@@ -90,6 +124,10 @@ def main() -> None:
     print(f"LP   IRR         : {w['lp_irr']:.1%}   LP equity multiple {w['lp_equity_multiple']:.2f}x")
     print(f"GP   promote     : {cur}{w['gp_promote']:,.0f}   ({w['gp_share_of_profit']:.1%} of profit)   promote drag {w['promote_drag']:.1%}")
     print(f"Downside (stress): project IRR {su['project_irr']:.1%}, LP IRR {sw['lp_irr']:.1%}, min DSCR {su['min_dscr']:.2f}x")
+    if u.get("refinance_cash_out"):
+        print(f"Refinance cash-out: {cur}{u['refinance_cash_out']:,.0f} (year {d.refinance_year})")
+    print(f"Monte Carlo LP IRR: median {mc['lp_irr_p50']:.1%}  (P5 {mc['lp_irr_p5']:.1%} - "
+          f"P95 {mc['lp_irr_p95']:.1%});  P(clears {mc['pref']:.0%} pref) = {mc['p_clears_pref']:.0%}")
     print(f"\nWrote: {OUT / (name + '_roi.json')}")
     print(f"Wrote: {xlsx}")
 

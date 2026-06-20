@@ -14,8 +14,13 @@
     "acquisition_costs_pct": 0.02,
     "selling_costs_pct": 0.015,
     "ltv": 0.65,
-    "interest_rate": 0.065
+    "interest_rate": 0.065,
+    "amortization_years": 0,
+    "refinance_year": 0,
+    "refinance_ltv": 0.65,
+    "refinance_rate": 0.0
   },
+  "_debt_note": "amortization_years: 0 = interest-only, else amortise over N years. refinance_year: 0 = none, else a mid-hold cash-out refinance at that year (sizes a new loan at refinance_ltv on the stabilised value; refinance_rate 0 keeps the current rate).",
   "waterfall_tiers": [
     [0.08, 0.20],
     [0.12, 0.30],

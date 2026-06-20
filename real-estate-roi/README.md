@@ -28,7 +28,12 @@ Outputs: `output/<name>_roi.json` and `output/deal_underwriting.xlsx`.
   2. **Promote tiers by IRR hurdle** (8–12% → GP 20%, 12–15% → 30%, >15% → 40%) → the GP's
      carried interest. Reports **LP IRR**, **GP promote $**, GP **share of profit**, and the
      **promote drag** (project IRR − LP IRR).
-- **Two-way sensitivity** (exit cap × NOI uplift) and a **downside stress** scenario.
+- **Debt options:** interest-only or **amortising** (`amortization_years`), plus an optional
+  **mid-hold cash-out refinance** (`refinance_year`) that sizes a new loan on the stabilised value
+  and returns capital early — how value-add sponsors actually juice IRR.
+- **Two-way sensitivity** (exit cap × NOI uplift), a **downside stress** scenario, and a
+  **Monte Carlo** on rent growth / exit cap / interest rate → the distribution of LP IRR and the
+  **probability of clearing the preferred return**.
 
 Each IRR hurdle keeps an LP capital account compounding at that rate; a distribution counts toward
 a hurdle only by the LP portion it pays. When the account hits zero, the LP has achieved that IRR

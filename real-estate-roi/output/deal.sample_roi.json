@@ -13,7 +13,11 @@
     "acquisition_costs_pct": 0.02,
     "selling_costs_pct": 0.015,
     "ltv": 0.65,
-    "interest_rate": 0.065
+    "interest_rate": 0.065,
+    "amortization_years": 0,
+    "refinance_year": 0,
+    "refinance_ltv": 0.65,
+    "refinance_rate": 0.0
   },
   "tiers": [
     [
@@ -38,9 +42,54 @@
     "ltv": 0.65,
     "ltc": 0.5555555555555556,
     "debt_service": 422500.0,
+    "amortizing": false,
+    "refinance_cash_out": 0.0,
+    "exit_loan_balance": 6500000.0,
     "debt_yield": 0.09230769230769231,
     "stabilized_noi": 780000.0,
     "exit_value": 15267771.683478262,
+    "debt_schedule": [
+      {
+        "year": 1,
+        "payment": 422500.0,
+        "interest": 422500.0,
+        "principal": 0.0,
+        "balance": 6500000.0,
+        "cash_out": 0.0
+      },
+      {
+        "year": 2,
+        "payment": 422500.0,
+        "interest": 422500.0,
+        "principal": 0.0,
+        "balance": 6500000.0,
+        "cash_out": 0.0
+      },
+      {
+        "year": 3,
+        "payment": 422500.0,
+        "interest": 422500.0,
+        "principal": 0.0,
+        "balance": 6500000.0,
+        "cash_out": 0.0
+      },
+      {
+        "year": 4,
+        "payment": 422500.0,
+        "interest": 422500.0,
+        "principal": 0.0,
+        "balance": 6500000.0,
+        "cash_out": 0.0
+      },
+      {
+        "year": 5,
+        "payment": 422500.0,
+        "interest": 422500.0,
+        "principal": 0.0,
+        "balance": 6500000.0,
+        "cash_out": 0.0
+      }
+    ],
     "project_irr": 0.16167071075422823,
     "equity_multiple": 1.9960546477357863,
     "avg_cash_on_cash": 0.07079727153846153,
@@ -167,6 +216,17 @@
     "lp_irr": 0.03790378989150116,
     "min_dscr": 1.2403846153846154,
     "assumptions": "exit cap +0.75pp, uplift -15pp, rate +1.5pp"
+  },
+  "monte_carlo": {
+    "n": 5000,
+    "p_clears_pref": 0.9496,
+    "pref": 0.08,
+    "lp_irr_mean": 0.14368639042250506,
+    "lp_irr_p5": 0.07984489532783016,
+    "lp_irr_p25": 0.11926040590939735,
+    "lp_irr_p50": 0.14485375185800908,
+    "lp_irr_p75": 0.16835670741695763,
+    "lp_irr_p95": 0.20657622704091816
   },
   "notes": "Assumption-driven, transparent institutional model. Edit deal.sample.json. GP co-invest = 0 (earns only promote). Not investment advice."
 }
