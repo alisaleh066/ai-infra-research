@@ -1,0 +1,71 @@
+{
+  "hurdle": 0.1,
+  "with_quality": false,
+  "layers": [
+    {
+      "layer": "Advanced packaging (CoWoS)",
+      "id": "cowos",
+      "tightness": 92.2,
+      "tickers": [
+        "TSM",
+        "AMKR"
+      ]
+    },
+    {
+      "layer": "HBM memory",
+      "id": "hbm",
+      "tightness": 86.8,
+      "tickers": [
+        "MU"
+      ]
+    },
+    {
+      "layer": "Leading-edge foundry",
+      "id": "foundry",
+      "tightness": 86.7,
+      "tickers": [
+        "TSM",
+        "INTC",
+        "GFS"
+      ]
+    },
+    {
+      "layer": "Power & grid",
+      "id": "power",
+      "tightness": 81.8,
+      "tickers": [
+        "VST",
+        "CEG",
+        "GEV",
+        "ETN"
+      ]
+    },
+    {
+      "layer": "Uranium / nuclear fuel",
+      "id": "uranium",
+      "tightness": 77.8,
+      "tickers": [
+        "CCJ",
+        "LEU"
+      ]
+    },
+    {
+      "layer": "GPUs / AI accelerators",
+      "id": "gpu",
+      "tightness": 75.8,
+      "tickers": [
+        "NVDA",
+        "AMD"
+      ]
+    },
+    {
+      "layer": "Copper",
+      "id": "copper",
+      "tightness": 74.4,
+      "tickers": [
+        "FCX",
+        "SCCO"
+      ]
+    }
+  ]
+}

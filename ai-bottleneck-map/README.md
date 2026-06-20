@@ -24,6 +24,17 @@ are explicit and editable (`scoring.py` / the app sidebar). With the default wei
 constraint is **advanced packaging (CoWoS)** — consistent with reported CoWoS capacity gating
 accelerator shipments.
 
+## Investability layer (links to the equity project)
+`investability.py` maps each layer to investable US-listed tickers, tightest first, and — with
+`--quality` — pulls a live fundamental snapshot (ROIC vs hurdle, Piotroski F-Score, quality rating)
+from the sibling `equity-valuation` project, so the map becomes actionable:
+```powershell
+& "$env:USERPROFILE\anaconda3\python.exe" investability.py            # mapping only
+& "$env:USERPROFILE\anaconda3\python.exe" investability.py --quality  # + live fundamentals
+```
+Foreign leaders that file 20-F (e.g. TSMC, Cameco) show `n/a` on the 10-K-based fundamentals —
+flagged, never faked. Also surfaced in the web app.
+
 ## Files
 - `scoring.py` — pure, tested tightness engine.
 - `layers.json` — the 7 layers + curated sub-metrics + capital-flow series (provenance tagged).

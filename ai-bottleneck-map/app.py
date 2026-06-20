@@ -61,3 +61,24 @@ for i in range(len(cf["years"])):
 area = pd.DataFrame(shares, index=cf["years"])
 st.area_chart(area)
 st.caption(raw["provenance"])
+
+st.subheader("Investability — own the bottleneck")
+st.caption("Each layer mapped to investable US-listed names, tightest first. Tick the box to pull a "
+           "live fundamental snapshot from the equity-valuation project (slower; US 10-K filers only).")
+import investability  # noqa: E402
+want_q = st.checkbox("Fetch live fundamentals per ticker", value=False)
+inv = investability.build(with_quality=want_q)
+inv_rows = []
+for r in inv["layers"]:
+    base = {"Tightness": r["tightness"], "Layer": r["layer"], "Tickers": ", ".join(r["tickers"])}
+    if want_q and r.get("quality"):
+        snaps = []
+        for t, q in r["quality"].items():
+            if "flag" in q:
+                snaps.append(f"{t}: n/a")
+            else:
+                roic = f"{q['roic']*100:.0f}%" if q["roic"] is not None else "n/a"
+                snaps.append(f"{t}: ROIC {roic}, F {q['f_score']}/9, {q['quality_rating']}")
+        base["Fundamentals"] = " | ".join(snaps)
+    inv_rows.append(base)
+st.dataframe(pd.DataFrame(inv_rows), use_container_width=True, hide_index=True)
