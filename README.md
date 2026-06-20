@@ -1,5 +1,8 @@
 # projectsf — three independent investment-analysis tools
 
+<!-- After publishing, set <you> to your GitHub username so this badge goes live (see PUBLISH.md). -->
+![tests](https://github.com/<you>/projectsf/actions/workflows/tests.yml/badge.svg)
+
 Three self-contained projects, each runnable on its own (own README, dependencies, launchers,
 tests). Built for Windows + Anaconda Python. No API keys required.
 

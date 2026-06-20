@@ -18,6 +18,7 @@ echo   EQUITY VALUATION
 echo      1) Value a stock        (DCF, scenarios, comps)
 echo      2) Research analysis    (scores + BUY/HOLD/SELL)
 echo      3) Web app
+echo      8) Screen a watchlist   (league table)
 echo.
 echo   AI BOTTLENECK MAP
 echo      4) Run                  (tightness ranking)
@@ -38,7 +39,15 @@ if "%c%"=="4" goto bott
 if "%c%"=="5" goto bottapp
 if "%c%"=="6" goto re
 if "%c%"=="7" goto reapp
+if "%c%"=="8" goto screen
 if "%c%"=="0" exit /b
+goto menu
+
+:screen
+cd /d "%ROOT%equity-valuation"
+"!PY!" screen.py
+echo.
+pause
 goto menu
 
 :val

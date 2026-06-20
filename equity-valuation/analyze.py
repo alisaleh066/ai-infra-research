@@ -52,7 +52,7 @@ def _wacc_beta(fund, price):
     return round(ke, 4), round(beta, 3), None
 
 
-def analyze(ticker: str) -> dict:
+def analyze(ticker: str, write: bool = True, quiet: bool = False) -> dict:
     OUT.mkdir(exist_ok=True)
     fund = datamod.fetch_fundamentals(ticker)
     pr = datamod.fetch_price(ticker)
@@ -80,10 +80,12 @@ def analyze(ticker: str) -> dict:
         rep["upside"] = None
     rep["recommendation"] = an.recommend(rep)
 
-    _write_md(rep)
-    _write_xlsx(rep)
-    analysis_xlsx.build(fund, rep)
-    _print(rep)
+    if write:
+        _write_md(rep)
+        _write_xlsx(rep)
+        analysis_xlsx.build(fund, rep)
+    if not quiet:
+        _print(rep)
     return rep
 
 

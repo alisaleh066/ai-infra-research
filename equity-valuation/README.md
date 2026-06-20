@@ -49,6 +49,15 @@ creation) · **Piotroski F-Score** · **Altman Z-Score** · **Beneish M-Score** 
 **reverse DCF** (growth implied by the price). Every score degrades gracefully — missing lines show
 `n/a`, never fabricated. Score formulas live in `analysis.py` and are unit-tested.
 
+## Screen a watchlist (`screen.py`)
+Run the workup across many names and rank them into a league table:
+```powershell
+& "$env:USERPROFILE\anaconda3\python.exe" screen.py            # default AI-infra watchlist
+& "$env:USERPROFILE\anaconda3\python.exe" screen.py NVDA MU AVGO
+```
+Writes `output/screen.csv` sorted by the composite recommendation score (deep-dive the top names
+with `analyze.py`).
+
 ## Analyst layer (the judgment, not just the machine)
 - **`THESIS_MU.md`** — a one-page IC memo on Micron: recommendation, base/bull/bear price targets,
   variant perception, the 3 drivers, kill criteria, catalysts, and sizing.

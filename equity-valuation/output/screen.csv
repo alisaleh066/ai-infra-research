@@ -1,0 +1,5 @@
+Rank,Ticker,Rating,Score,ROIC,F-Score,Altman Z,DCF upside
+1,MU,HOLD,-1,13.6%,7,28.65,-98.8%
+2,NVDA,SELL,-2,66.4%,4,67.25,-71.7%
+3,AMKR,SELL,-2,8.1%,4,5.5,-87.6%
+4,INTC,SELL,-3,-1.2%,6,,-120.3%
